@@ -1,0 +1,7 @@
+:root {
+    --stadium-toggle-button-font-color: white;
+    --stadium-toggle-button-background-color: #2196f3;
+
+    --stadium-toggle-button-active-font-color: #2196f3;
+    --stadium-toggle-button-active-background-color: white;
+}
