@@ -20,14 +20,61 @@ This repo contains one Stadium 6.7 application
 4. Add the Javascript below into the JavaScript code property
 ```javascript
 /* Stadium Script Version 1.0 */
-let selectOption = (e) => {
-    let parent = e.target.closest(".stadium-button-toggle");
-    if (parent.querySelector(".stadium-toggle-button.active")) parent.querySelector(".stadium-toggle-button.active").classList.remove("active");
-    e.target.classList.add("active");
-    let input = e.target.closest(".radio").querySelector("input");
+let scope = this;
+let pageName = window.location.pathname.replace("/", "");
+let selectSingleOption = (e) => {
+    let container = e.target.closest(".stadium-toggle-button");
+    let activeItem = container.querySelector(".active");
+    if (activeItem) activeItem.classList.remove("active");
+    let parent = e.target.closest(".radio");
+    let input = parent.querySelector("input");
     if (!input.checked) {
+        parent.classList.add("active");
         input.checked = true;
-        input.dispatchEvent(new Event("change"));
+    } else {
+        parent.classList.remove("active");
+        input.checked = false;
+        let inputName = container.id.replace(`${pageName}_`, "").replace("-container", "");
+        scope[`${inputName}SelectedOption`] = {};
+    }
+    input.dispatchEvent(new Event("change"));
+};
+let selectOption = (e) => {
+    let parent = e.target.closest(".checkbox");
+    let input = parent.querySelector("input");
+    parent.classList.toggle("active");
+    input.checked = !input.checked;
+    input.dispatchEvent(new Event("change"));
+};
+let initToggle = () => {
+    observer.disconnect();
+    let toggles = document.querySelectorAll(".stadium-toggle-button");
+    for (let i = 0; i < toggles.length; i++) {
+        let buttons = toggles[i].querySelectorAll(".toggle-button");
+        for (let j = 0; j < buttons.length; j++) {
+            buttons[j].remove();
+        }
+        let inputContainer = toggles[i].querySelectorAll(".checkbox, .radio");
+        for (let j = 0; j < inputContainer.length; j++) {
+            let button = document.createElement("button");
+            button.classList.add("btn", "btn-lg", "btn-default", "toggle-button");
+            let input = inputContainer[j].querySelector("input");
+            if (input.checked) {
+                inputContainer[j].classList.add("active");
+            }
+            if (input.getAttribute("disabled") !== null) {
+                button.setAttribute("disabled", "disabled");
+            }
+            if (toggles[i].classList.contains("check-box-list-container")) {
+                button.addEventListener("click", selectOption);
+            } else {
+                button.addEventListener("click", selectSingleOption);
+            }
+            let buttonText = document.createTextNode(inputContainer[j].querySelector("label").textContent);
+            button.appendChild(buttonText);
+            inputContainer[j].appendChild(button);
+        }
+        observer.observe(toggles[i], options);
     }
 };
 let options = {
@@ -35,42 +82,16 @@ let options = {
         subtree: true,
     },
     observer = new MutationObserver(initToggle);
-
 initToggle();
-
-function initToggle() {
-    observer.disconnect();
-    let toggles = document.querySelectorAll(".stadium-button-toggle");
-    for (let i = 0; i < toggles.length; i++) {
-        let buttons = toggles[i].querySelectorAll(".stadium-toggle-button");
-        for (let j = 0; j < buttons.length; j++) {
-            buttons[j].remove();
-        }
-        let radios = toggles[i].querySelectorAll(".radio");
-        for (let j = 0; j < radios.length; j++) {
-            let button = document.createElement("button");
-            button.classList.add("btn", "btn-lg", "btn-default", "stadium-toggle-button");
-            let input = radios[j].querySelector("input");
-            if (input.checked) {
-                button.classList.add("active");
-            }
-            console.log(input.getAttribute("disabled"));
-            if (input.getAttribute("disabled") !== null) {
-                button.setAttribute("disabled", "disabled");
-            }
-            button.addEventListener("click", selectOption);
-            let buttonText = document.createTextNode(radios[j].querySelector("label").textContent);
-            button.appendChild(buttonText);
-            radios[j].appendChild(button);
-        }
-        observer.observe(toggles[i], options);
-    }
-}
 ```
 
-## Page Setup
+## Single-Select Setup
 1. Drag *RadioButtonList* control to a page
-2. Add a class called "stadium-button-toggle" to the control classes property
+2. Add a class called "stadium-toggle-button" to the control classes property
+
+## Multi-Select Setup
+1. Drag *CheckBoxList* control to a page
+2. Add a class called "stadium-toggle-button" to the control classes property
 
 ## Page.Load Setup
 1. Drag the Global Script called "ToggleButton" into the Page.Load event handler

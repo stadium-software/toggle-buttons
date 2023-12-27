@@ -1,12 +1,12 @@
 /*---Button Toggle---*/
-
-.stadium-button-toggle.radio-button-list-container {
+.stadium-toggle-button.check-box-list-container,
+.stadium-toggle-button.radio-button-list-container {
     position: relative;
     padding-right: 16px;
     margin-top: 10px;
     background: transparent;
 
-    & > div {
+    &>div {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -14,6 +14,7 @@
     }
 
     & input[type=radio],
+    & input[type=checkbox],
     & label {
         position: absolute;
         height: 0;
@@ -25,24 +26,27 @@
         outline: 0;
     }
 
+    & .checkbox,
     & .radio {
         border-right: 1px solid var(--stadium-toggle-button-font-color);
         padding: 0;
-        
+
         & button {
             color: var(--stadium-toggle-button-font-color);
-            background-color:var(--stadium-toggle-button-background-color);
+            background-color: var(--stadium-toggle-button-background-color);
             box-shadow: none;
             border-radius: 0;
             text-transform: none;
         }
-
-        & .active {
-            background-color: var(--stadium-toggle-button-active-background-color);
-            color: var(--stadium-toggle-button-active-font-color);
-        }
     }
 
+    & .checkbox.active button,
+    & .radio.active button {
+        background-color: var(--stadium-toggle-button-active-background-color);
+        color: var(--stadium-toggle-button-active-font-color);
+    }
+
+    & .checkbox:first-child,
     & .radio:first-child {
         & button {
             border-top-left-radius: 4px;
@@ -50,6 +54,7 @@
         }
     }
 
+    & .checkbox:last-child,
     & .radio:last-child {
         border-right: 1px solid transparent;
 
@@ -59,7 +64,9 @@
         }
     }
 }
-.stadium-button-toggle.radio-button-list-container.required-indicator:after {
+
+.stadium-toggle-button.check-box-list-container.required-indicator:after,
+.stadium-toggle-button.radio-button-list-container.required-indicator:after {
     top: 0;
     right: 4px;
 }
