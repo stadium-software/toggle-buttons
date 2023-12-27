@@ -2,7 +2,7 @@
 
 A script to convert Radio Button Lists into toggle buttons
 
-https://github.com/stadium-software/toggle-buttons-from-radio-button-list/assets/2085324/c0f70b70-f39a-4b63-b708-56fe54f1ccd7
+https://github.com/stadium-software/toggle-buttons/assets/2085324/92ae0e4a-1405-4c31-9441-9105bff40ece
 
 ## Sample applications
 This repo contains one Stadium 6.7 application
