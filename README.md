@@ -1,6 +1,6 @@
 # Toggle Buttons
 
-A script to convert Radio Button Lists into single-select toggle buttons or CheckBox Lists into multi-select toggle buttons
+A script to convert RadioButtonList controls into single-select toggle buttons or CheckBoxList controls into multi-select toggle buttons
 
 https://github.com/stadium-software/toggle-buttons/assets/2085324/92ae0e4a-1405-4c31-9441-9105bff40ece
 
