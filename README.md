@@ -19,7 +19,7 @@ This repo contains one Stadium 6.7 application
 3. Drag a *JavaScript* action into the script
 4. Add the Javascript below into the JavaScript code property
 ```javascript
-/* Stadium Script Version 1.0 */
+/* Stadium Script Version 1.0 https://github.com/stadium-software/toggle-buttons */
 let scope = this;
 let pageName = window.location.pathname.replace("/", "");
 let selectSingleOption = (e) => {
