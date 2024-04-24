@@ -4,12 +4,8 @@ A script to convert RadioButtonList controls into single-select toggle buttons o
 
 https://github.com/stadium-software/toggle-buttons/assets/2085324/92ae0e4a-1405-4c31-9441-9105bff40ece
 
-## Sample applications
-This repo contains one Stadium 6.7 application
-[ToggleButtons.sapz](Stadium6/ToggleButtons.sapz?raw=true)
-
 # Version 
-1.0 Initial
+1.1 Made single-select work like Radio Button List (removed ability to de-select)
 
 ## Application Setup
 1. Check the *Enable Style Sheet* checkbox in the application properties
@@ -19,25 +15,18 @@ This repo contains one Stadium 6.7 application
 3. Drag a *JavaScript* action into the script
 4. Add the Javascript below into the JavaScript code property
 ```javascript
-/* Stadium Script Version 1.0 https://github.com/stadium-software/toggle-buttons */
-let scope = this;
-let pageName = window.location.pathname.replace("/", "");
+/* Stadium Script Version 1.1 */
 let selectSingleOption = (e) => {
     let container = e.target.closest(".stadium-toggle-button");
-    let activeItem = container.querySelector(".active");
-    if (activeItem) activeItem.classList.remove("active");
     let parent = e.target.closest(".radio");
     let input = parent.querySelector("input");
     if (!input.checked) {
+        let activeItem = container.querySelector(".active");
+        if (activeItem) activeItem.classList.remove("active");
         parent.classList.add("active");
         input.checked = true;
-    } else {
-        parent.classList.remove("active");
-        input.checked = false;
-        let inputName = container.id.replace(`${pageName}_`, "").replace("-container", "");
-        scope[`${inputName}SelectedOption`] = {};
+        input.dispatchEvent(new Event("change"));
     }
-    input.dispatchEvent(new Event("change"));
 };
 let selectOption = (e) => {
     let parent = e.target.closest(".checkbox");
