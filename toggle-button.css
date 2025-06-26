@@ -44,6 +44,7 @@
     .radio.active button {
         background-color: var(--stadium-toggle-button-active-background-color, var(--BUTTON-TEXT-COLOR));
         color: var(--stadium-toggle-button-active-font-color, var(--BUTTON-BACKGROUND-COLOR));
+        border-color: var(--stadium-toggle-button-active-font-color, var(--BUTTON-BACKGROUND-COLOR));
     }
 
     .checkbox:first-child,

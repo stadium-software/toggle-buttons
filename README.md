@@ -9,6 +9,8 @@ https://github.com/stadium-software/toggle-buttons/assets/2085324/6f9071b7-86fd-
 
 1.1.1 Updated readme to 6.12+; Converted px to rem
 
+1.1.2 Adjusted border color for selected items
+
 ## Application Setup
 1. Check the *Enable Style Sheet* checkbox in the application properties
 
